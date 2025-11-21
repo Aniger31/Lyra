@@ -1,19 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
+
 
 import React, {useState} from 'react';
-import useLocalStorage from './useAsyncStorage';
-import { MOODS } from './moods';
+import useAsyncStorage from './useAsyncStorage';
+
 
 import SongForm from './components/SongForm';
-//import FilterBar from './components/FiterBar';
-//import SongList from './components/SongList';
+import FilterBar from './components/FilterBar';
+import SongList from './components/SongList';
 
 
- export default function App() {
+function App() {
   //Hook para almacenar la lista de canciones
 
-  const [songs, setSongs] = useLocalStorage('mood-mixer-songs', []);
+  const [songs, setSongs, isLoaded] = useAsyncStorage('mood-mixer-songs', []);
 
   //Estado inicial de nuestros moods
   const [activeFilter, setActiveFilter] = useState('All');
@@ -25,41 +26,70 @@ import SongForm from './components/SongForm';
     setSongs(prevSongs => [...prevSongs, {...newSong, id: Date.now()}]);
   };
 
+  const deleteSong =(idToDelete) =>{
+    setSongs(prevSongs => prevSongs.filter(song => song.id !== idToDelete));
+  }
+
   //Logica para filtrar la lista antes de mostrarla
   const filteredSongs = songs.filter(song => {
     if(activeFilter === 'All') return true;
     return song.mood === activeFilter;
   });
 
+  if(!isLoaded){
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color= "#2582E5"/>
+        <Text style={{marginTop:10}}>Cargando canciones...</Text>
+      </View>
+    );
+  }
 
   return(
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Lyra</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Lyra</Text>
+      </View>
 
       <SongForm onAddSong={addSong} />
+      {/* Barra de filtros */ }
+      <FilterBar
+        activeFilter={activeFilter}
+        setActiveFilter={setActiveFilter}
+      />
 
-      <View style={styles.listBox}>
-        <Text>Lista de Canciones:</Text>
-        <Text>{JSON.stringify(songs, null, 2)}</Text>
-      </View>
-    </ScrollView>
+      {/**Lista de Canciones filtradas */}
+      <SongList
+        songs={filteredSongs}
+        onDeleteSong={deleteSong}
+      />
+    </SafeAreaView>
   );
   
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
+  safeArea:{
+    flex:1,
+    backgroundColor:'#f5f5f5',
   },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 24,
+  header:{
+    paddingHorizontal:15,
+    paddingTop:10,
+    paddingBottom:5,
+    backgroundColor:'#fff',
   },
-  listBox: {
-    marginTop: 32,
-    padding: 16,
-    backgroundColor: "#f3f4f6",
-    borderRadius: 8,
+  title:{
+    fontSize:24,
+    fontWeight:'bold',
+    textAlign:'center',
+    color:'#2582E5',
+  },
+  loadingContainer:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
   }
 });
+
+export default App;

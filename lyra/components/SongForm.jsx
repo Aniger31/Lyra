@@ -24,7 +24,7 @@ function SongForm({ onAddSong }) {
 
   // --- LLAMADA A LA API DE ITUNES ---
   const searchiTunes = async (e) => {
-    e.preventDefault?.(); // RN no usa eventos form, pero por si acaso
+    e.preventDefault?.(); 
 
     if (!searchTerm.trim()) return;
 
@@ -35,7 +35,7 @@ function SongForm({ onAddSong }) {
 
     const url = `https://itunes.apple.com/search?term=${encodeURIComponent(
       searchTerm
-    )}&entity=song&limit10`;
+    )}&entity=song&limit=10`;
 
     try {
       const response = await fetch(url);
@@ -66,19 +66,19 @@ function SongForm({ onAddSong }) {
         id: selectedTrack.trackId,
         title: selectedTrack.trackName,
         artist: selectedTrack.artistName,
-        artworkUrl: selectedTrack.artworkUrl100.replace(
-          "100x100bb",
-          "300x300bb"
-        ),
+        artworkUrl: selectedTrack.artworkUrl100.replace("100x100bb", "300x300bb"), 
         mood: selectedMood,
       };
 
       onAddSong(newSong);
 
-      setSearchTerm("");
-      setSearchResults([]);
-      setSelectedTrack(null);
-      setSelectedMood(MOODS[1]);
+      setTimeout (()=>{
+        setSearchTerm("");
+        setSearchResults([]);
+        setSelectedTrack(null);
+        setSelectedMood(MOODS[1]);
+      },0);
+      
     }
   };
 
@@ -154,7 +154,11 @@ function SongForm({ onAddSong }) {
                   style={styles.picker}
                 >
                   {MOODS.filter((m) => m !== "All").map((mood) => (
-                    <Picker.Item key={mood} label={mood} value={mood} />
+                    <Picker.Item 
+                        key={mood} 
+                        label={mood} 
+                        value={mood}>
+                    </Picker.Item>
                   ))}
                 </Picker>
 
@@ -170,7 +174,7 @@ function SongForm({ onAddSong }) {
   );
 }
 
-export default SongForm;
+
 
 // -------------------- ESTILOS --------------------
 const styles = StyleSheet.create({
@@ -282,3 +286,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
 });
+
+
+export default SongForm;
