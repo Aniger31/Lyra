@@ -38,25 +38,28 @@ const styles =StyleSheet.create({
         borderBottomWidth:1,
         borderBottomColor: '#e0e0e0',
     },
-    moodButton:{
-        paddingHorizontal:15,
+    moodButton: {
+        paddingHorizontal: 18,
         paddingVertical: 8,
-        borderRadius:20,
-        marginHorizontal:5,
-        backgroundColor: '#f0f0f0',
+        borderRadius: 20,
+        marginHorizontal: 6,
+        backgroundColor: '#f2f2f7',
+        shadowColor: '#000',
+        shadowOpacity: 0.05,
+        shadowRadius: 3,
     },
-    activeMoodButton:{
-        backgroundColor:'#2582E5' //color azul para cuando este activo
+    activeMoodButton: {
+        backgroundColor: '#1D4ED8',
     },
-    moodText:{
-        color:'#333',
-        fontWeight:'500',
-        fontSize:14,
+    moodText: {
+        color: '#4a4a4a',
+        fontWeight: '600',
     },
-    activeMoodText:{
-        color:'white',
-        fontWeight:'bold',
+    activeMoodText: {
+        color: 'white',
+        fontWeight: '700',
     },
+
 });
 
 export default FilterBar;

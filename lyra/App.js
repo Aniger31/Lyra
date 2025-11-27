@@ -2,7 +2,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import * as SplashScreen from "expo-splash-screen";
 import useAsyncStorage from './useAsyncStorage';
 
 
@@ -16,6 +17,12 @@ function App() {
 
   const [songs, setSongs, isLoaded] = useAsyncStorage('mood-mixer-songs', []);
 
+   useEffect(() => {
+      SplashScreen.preventAutoHideAsync(); // evita que se oculte el splash screen de forma predeterminada
+      setTimeout(() => {
+        SplashScreen.hideAsync(); // oculta después de 2s
+      }, 2000);
+    }, []);
   //Estado inicial de nuestros moods
   const [activeFilter, setActiveFilter] = useState('All');
 
@@ -45,13 +52,15 @@ function App() {
     );
   }
 
+ 
+
   return(
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
         <Text style={styles.title}>Lyra</Text>
       </View>
 
-      <SongForm onAddSong={addSong} />
+      <SongForm onAddSong={addSong} allSongs={songs} />
       {/* Barra de filtros */ }
       <FilterBar
         activeFilter={activeFilter}
@@ -73,23 +82,28 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#f5f5f5',
   },
-  header:{
-    paddingHorizontal:15,
-    paddingTop:10,
-    paddingBottom:5,
-    backgroundColor:'#fff',
-  },
-  title:{
-    fontSize:24,
-    fontWeight:'bold',
-    textAlign:'center',
-    color:'#2582E5',
-  },
-  loadingContainer:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
-  }
+  header: {
+  paddingHorizontal: 20,
+  paddingVertical: 14,
+  backgroundColor: 'rgba(255,255,255,0.85)',
+  backdropFilter: 'blur(12px)', // No siempre soportado, opcional
+  shadowColor: '#000',
+  shadowOpacity: 0.08,
+  shadowRadius: 8,
+  elevation: 0,
+},
+title: {
+  fontSize: 28,
+  fontWeight: '700',
+  textAlign: 'center',
+  color: '#1D4ED8',
+  letterSpacing: 0.5,
+},
+safeArea: {
+  flex: 1,
+  backgroundColor:'#fafafa',
+},
+
 });
 
 export default App;

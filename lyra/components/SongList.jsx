@@ -39,25 +39,25 @@ const styles = StyleSheet.create({
     listContent:{
         paddingBottom:20, //Espacio al final de la lista
     },
-    emptyContainer:{
-        padding:30,
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:'#f9f9f9',
-        borderRadius:10,
-        margin:20,
-    },
-    emptyText:{
-        fontSize:16,
-        fontWeight:'bold',
-        color:'#666',
-        textAlign:'center',
-    },
-    emptyTextSecondary:{
-        fontSize:14,
-        color:'#999',
-        marginTop:5,
-    }
+ emptyContainer: {
+  padding: 40,
+  alignItems: 'center',
+  backgroundColor: '#f2f2f7',
+  borderRadius: 16,
+  margin: 20,
+},
+emptyText: {
+  fontSize: 17,
+  fontWeight: '600',
+  color: '#444',
+  textAlign: 'center',
+},
+emptyTextSecondary: {
+  fontSize: 14,
+  color: '#888',
+  marginTop: 6,
+},
+
 });
 
 export default SongList;

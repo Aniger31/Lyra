@@ -139,19 +139,23 @@ function SongForm({ onAddSong }) {
               </TouchableOpacity>
             ))}
           </ScrollView>
+          
 
           {/* MOOD + AÑADIR */}
           {selectedTrack && (
-            <View style={styles.footerBox}>
-              <Text style={styles.classifying}>
+            
+            <View style={styles.resultsContainer}>
+              <View style={styles.selectionBar}>
+              <Text style={styles.selectionText}>
                 Clasificando: {selectedTrack.trackName}
               </Text>
+              </View>
 
-              <View style={styles.moodRow}>
+              <View style={styles.selectionRow}>
+                <View style={styles.pickerContainer}>
                 <Picker
                   selectedValue={selectedMood}
                   onValueChange={setSelectedMood}
-                  style={styles.picker}
                 >
                   {MOODS.filter((m) => m !== "All").map((mood) => (
                     <Picker.Item 
@@ -161,11 +165,13 @@ function SongForm({ onAddSong }) {
                     </Picker.Item>
                   ))}
                 </Picker>
+                </View>
 
                 <TouchableOpacity onPress={handleAddSong} style={styles.addBtn}>
                   <Text style={styles.addBtnText}>Añadir al Mood</Text>
                 </TouchableOpacity>
               </View>
+            
             </View>
           )}
         </View>
@@ -179,12 +185,15 @@ function SongForm({ onAddSong }) {
 // -------------------- ESTILOS --------------------
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 24,
-    elevation: 3,
-  },
+    backgroundColor: '#ffffff',
+    padding: 20,
+    borderRadius: 18,
+    marginHorizontal: 12,
+    marginVertical: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+},
   title: {
     fontSize: 20,
     fontWeight: "600",
@@ -196,18 +205,20 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   input: {
-    flex: 1,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
-  },
+  flex: 1,
+  padding: 12,
+  borderWidth: 1,
+  borderColor: '#d1d1d6',
+  borderRadius: 12,
+  backgroundColor: '#fafafa',
+  fontSize: 15,
+},
   searchBtn: {
-    backgroundColor: "#2563eb",
-    paddingHorizontal: 16,
-    justifyContent: "center",
-    borderRadius: 10,
-  },
+    backgroundColor: '#1D4ED8',
+    paddingHorizontal: 18,
+    justifyContent: 'center',
+    borderRadius: 12,
+},
   searchBtnText: {
     color: "white",
     fontWeight: "600",
@@ -229,19 +240,18 @@ const styles = StyleSheet.create({
   resultsList: {
     maxHeight: 250,
   },
-  trackItem: {
-    flexDirection: "row",
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 8,
-    backgroundColor: "#f8f8f8",
-    alignItems: "center",
-  },
-  trackItemSelected: {
-    backgroundColor: "#dbeafe",
-    borderWidth: 1,
-    borderColor: "#3b82f6",
-  },
+trackItem: {
+  flexDirection: 'row',
+  padding: 12,
+  borderRadius: 12,
+  backgroundColor: '#f2f2f7',
+  marginBottom: 10,
+},
+trackItemSelected: {
+  backgroundColor: '#dbeafe',
+  borderColor: '#3b82f6',
+  borderWidth: 1,
+},
   art: {
     width: 40,
     height: 40,
@@ -275,16 +285,46 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
   },
-  addBtn: {
-    backgroundColor: "#16a34a",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 10,
-  },
+addBtn: {
+  backgroundColor: '#16a34a',
+  paddingHorizontal: 16,
+  paddingVertical: 10,
+  borderRadius: 12,
+},
   addBtnText: {
     color: "white",
     fontWeight: "600",
   },
+  selectionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    marginTop: 10,
+    justifyContent: 'space-between', // Para distribuir bien el Mood y el botón
+},
+pickerContainer: {
+    // Esto simula una caja de formulario para el Picker
+    flex: 1, // Ocupa el espacio disponible
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 12, // Bordes redondeados
+    marginRight: 15,
+    overflow: 'hidden', // Importante para el Picker en iOS
+},
+
+selectionBar: {
+    backgroundColor: '#EBF4FF', // Fondo azul muy claro
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 15, // Espacio antes de la fila del Picker
+    borderWidth: 1,
+    borderColor: '#3B82F6', // Borde azul claro
+},
+selectionText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1D4ED8', // Texto azul oscuro
+},
 });
 
 

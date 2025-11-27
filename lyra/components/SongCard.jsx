@@ -41,49 +41,46 @@ const SongCard = ({song, onDeleteSong}) => {
 };
 
 const styles =StyleSheet.create({
-    card:{
-        flexDirection:'row',
-        backgroundColor: '#ffffff',
-        padding:15,
-        marginVertical:8,
-        marginHorizontal:10,
-        borderRadius:10,
-        shadowColor:'#000',
-        shadowOffset: {width:0,height:2},
-        shadowOpacity:0.1,
-        shadowRadius: 4,
-        elevation: 3, //Shadow para android
-        alignItems: 'center',
-    },
-    artwork: {
-        width:60,
-        height:60,
-        borderRadius:5,
-    },
-    infoContainer:{
-        flex:1,
-        marginLeft:15,
-        marginRight:10,
-    },
-    title:{
-        fontSize:16,
-        fontWeight:'bold',
-        color:'#333',
-    },
-    artist:{
-        fontSize:14,
-        color:'#666',
-        marginTop:2,
-    },
-    mood:{
-        fontSize: 12,
-        color: '#2582E5',
-        fontWeight: '600',
-        marginTop:5,
-    },
-    deleteButton:{
-        padding:8,
-    },
+card: {
+  flexDirection: 'row',
+  backgroundColor: '#fff',
+  padding: 16,
+  marginVertical: 10,
+  marginHorizontal: 14,
+  borderRadius: 16,
+  shadowColor: '#000',
+  shadowOpacity: 0.06,
+  shadowRadius: 10,
+  elevation: 2,
+  alignItems: 'center',
+},
+artwork: {
+  width: 70,
+  height: 70,
+  borderRadius: 10,
+},
+title: {
+  fontSize: 17,
+  fontWeight: '600',
+  color: '#111',
+},
+artist: {
+  fontSize: 14,
+  color: '#555',
+  marginTop: 2,
+},
+mood: {
+  marginTop: 6,
+  fontSize: 13,
+  fontWeight: '600',
+  color: '#1D4ED8',
+},
+deleteButton: {
+  padding: 8,
+  borderRadius: 10,
+  backgroundColor: '#ffecec',
+},
+
     
 });
 
