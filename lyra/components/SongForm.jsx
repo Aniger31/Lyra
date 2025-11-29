@@ -7,11 +7,13 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Alert,
+  Keyboard,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { MOODS } from "../moods";
 
-function SongForm({ onAddSong }) {
+function SongForm({ onAddSong , allSongs}) {
   // Estados de búsqueda
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -27,6 +29,9 @@ function SongForm({ onAddSong }) {
     e.preventDefault?.(); 
 
     if (!searchTerm.trim()) return;
+
+    //Ocultar el teclado al inicial la busqueda
+    Keyboard.dismiss();
 
     setIsLoading(true);
     setError(null);
@@ -62,6 +67,23 @@ function SongForm({ onAddSong }) {
   // --- AÑADIR CANCIÓN ---
   const handleAddSong = () => {
     if (selectedTrack && selectedMood) {
+      //Logica para la validacion de duplicados
+      const isDuplicate = allSongs.some(song =>
+        song.id === selectedTrack.trackId
+      );
+
+      if(isDuplicate){
+        //Se notifica al usuario y detiene la ejecucion
+        Alert.alert(
+          "Canción Duplicada",
+          `${selectedTrack.trackName} ya está en tu lista.`,
+          [{text:"OK"}]
+        );
+        return; //se detiene la funcion
+      }
+
+
+      //Construccion de la nueva cancion
       const newSong = {
         id: selectedTrack.trackId,
         title: selectedTrack.trackName,
@@ -72,6 +94,10 @@ function SongForm({ onAddSong }) {
 
       onAddSong(newSong);
 
+      //Ocultar el teclado antes de limpiar
+      Keyboard.dismiss();
+
+      
       setTimeout (()=>{
         setSearchTerm("");
         setSearchResults([]);

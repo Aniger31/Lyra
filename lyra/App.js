@@ -17,7 +17,7 @@ function App() {
 
   const [songs, setSongs, isLoaded] = useAsyncStorage('mood-mixer-songs', []);
 
-   useEffect(() => {
+  useEffect(() => {
       SplashScreen.preventAutoHideAsync(); // evita que se oculte el splash screen de forma predeterminada
       setTimeout(() => {
         SplashScreen.hideAsync(); // oculta después de 2s
