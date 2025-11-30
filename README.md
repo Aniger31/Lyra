@@ -124,7 +124,16 @@ La aplicación sigue una estructura clara con énfasis en la separación de comp
 
 ## 📱 Vista Previa (Screenshots)
 
-> *Agrega aquí tus imágenes/GIFs de la aplicación en acción.*
+
+
+https://github.com/user-attachments/assets/c107eee0-e9e0-4dd8-bf2b-846ec7fcd862
+
+
+
+https://github.com/user-attachments/assets/593bf92e-a622-449a-a48e-de9d3623b8e3
+
+<img width="585" height="1266" alt="IMG_6595" src="https://github.com/user-attachments/assets/afd14aaa-e3c9-42ff-992b-5624eb886b11" />
+
 
 -----
 
