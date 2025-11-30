@@ -13,7 +13,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { MOODS } from "../moods";
 
-function SongForm({ onAddSong , allSongs}) {
+function SongForm({ onAddSong, allSongs }) {
   // Estados de búsqueda
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -26,7 +26,7 @@ function SongForm({ onAddSong , allSongs}) {
 
   // --- LLAMADA A LA API DE ITUNES ---
   const searchiTunes = async (e) => {
-    e.preventDefault?.(); 
+    e.preventDefault?.();
 
     if (!searchTerm.trim()) return;
 
@@ -68,43 +68,49 @@ function SongForm({ onAddSong , allSongs}) {
   const handleAddSong = () => {
     if (selectedTrack && selectedMood) {
       //Logica para la validacion de duplicados
-      const isDuplicate = allSongs.some(song =>
-        song.id === selectedTrack.trackId
+      const isDuplicate = allSongs.some(
+        (song) =>
+          song.title === selectedTrack.trackName &&
+          song.artist === selectedTrack.artistName
       );
 
-      if(isDuplicate){
+      if (isDuplicate) {
         //Se notifica al usuario y detiene la ejecucion
         Alert.alert(
           "Canción Duplicada",
           `${selectedTrack.trackName} ya está en tu lista.`,
-          [{text:"OK"}]
+          [{ text: "OK" }]
         );
         return; //se detiene la funcion
       }
-
 
       //Construccion de la nueva cancion
       const newSong = {
         id: selectedTrack.trackId,
         title: selectedTrack.trackName,
         artist: selectedTrack.artistName,
-        artworkUrl: selectedTrack.artworkUrl100.replace("100x100bb", "300x300bb"), 
+        artworkUrl: selectedTrack.artworkUrl100.replace(
+          "100x100bb",
+          "300x300bb"
+        ),
         mood: selectedMood,
+        previewUrl: selectedTrack.previewUrl, //se agrego para guardar el url previo
       };
+      console.log("allSongs:", allSongs);
+      console.log("selectedTrack.trackId:", selectedTrack.trackId);
+      console.log("isDuplicate:", isDuplicate);
 
       onAddSong(newSong);
 
       //Ocultar el teclado antes de limpiar
       Keyboard.dismiss();
 
-      
-      setTimeout (()=>{
+      setTimeout(() => {
         setSearchTerm("");
         setSearchResults([]);
         setSelectedTrack(null);
         setSelectedMood(MOODS[1]);
-      },0);
-      
+      }, 0);
     }
   };
 
@@ -165,39 +171,36 @@ function SongForm({ onAddSong , allSongs}) {
               </TouchableOpacity>
             ))}
           </ScrollView>
-          
 
           {/* MOOD + AÑADIR */}
           {selectedTrack && (
-            
             <View style={styles.resultsContainer}>
               <View style={styles.selectionBar}>
-              <Text style={styles.selectionText}>
-                Clasificando: {selectedTrack.trackName}
-              </Text>
+                <Text style={styles.selectionText}>
+                  Clasificando: {selectedTrack.trackName}
+                </Text>
               </View>
 
               <View style={styles.selectionRow}>
                 <View style={styles.pickerContainer}>
-                <Picker
-                  selectedValue={selectedMood}
-                  onValueChange={setSelectedMood}
-                >
-                  {MOODS.filter((m) => m !== "All").map((mood) => (
-                    <Picker.Item 
-                        key={mood} 
-                        label={mood} 
-                        value={mood}>
-                    </Picker.Item>
-                  ))}
-                </Picker>
+                  <Picker
+                    selectedValue={selectedMood}
+                    onValueChange={setSelectedMood}
+                  >
+                    {MOODS.filter((m) => m !== "All").map((mood) => (
+                      <Picker.Item
+                        key={mood}
+                        label={mood}
+                        value={mood}
+                      ></Picker.Item>
+                    ))}
+                  </Picker>
                 </View>
 
                 <TouchableOpacity onPress={handleAddSong} style={styles.addBtn}>
                   <Text style={styles.addBtnText}>Añadir al Mood</Text>
                 </TouchableOpacity>
               </View>
-            
             </View>
           )}
         </View>
@@ -206,20 +209,18 @@ function SongForm({ onAddSong , allSongs}) {
   );
 }
 
-
-
 // -------------------- ESTILOS --------------------
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     padding: 20,
     borderRadius: 18,
     marginHorizontal: 12,
     marginVertical: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.06,
     shadowRadius: 8,
-},
+  },
   title: {
     fontSize: 20,
     fontWeight: "600",
@@ -231,20 +232,20 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   input: {
-  flex: 1,
-  padding: 12,
-  borderWidth: 1,
-  borderColor: '#d1d1d6',
-  borderRadius: 12,
-  backgroundColor: '#fafafa',
-  fontSize: 15,
-},
-  searchBtn: {
-    backgroundColor: '#1D4ED8',
-    paddingHorizontal: 18,
-    justifyContent: 'center',
+    flex: 1,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#d1d1d6",
     borderRadius: 12,
-},
+    backgroundColor: "#fafafa",
+    fontSize: 15,
+  },
+  searchBtn: {
+    backgroundColor: "#1D4ED8",
+    paddingHorizontal: 18,
+    justifyContent: "center",
+    borderRadius: 12,
+  },
   searchBtnText: {
     color: "white",
     fontWeight: "600",
@@ -266,18 +267,18 @@ const styles = StyleSheet.create({
   resultsList: {
     maxHeight: 250,
   },
-trackItem: {
-  flexDirection: 'row',
-  padding: 12,
-  borderRadius: 12,
-  backgroundColor: '#f2f2f7',
-  marginBottom: 10,
-},
-trackItemSelected: {
-  backgroundColor: '#dbeafe',
-  borderColor: '#3b82f6',
-  borderWidth: 1,
-},
+  trackItem: {
+    flexDirection: "row",
+    padding: 12,
+    borderRadius: 12,
+    backgroundColor: "#f2f2f7",
+    marginBottom: 10,
+  },
+  trackItemSelected: {
+    backgroundColor: "#dbeafe",
+    borderColor: "#3b82f6",
+    borderWidth: 1,
+  },
   art: {
     width: 40,
     height: 40,
@@ -311,47 +312,46 @@ trackItemSelected: {
     flex: 1,
     height: 40,
   },
-addBtn: {
-  backgroundColor: '#16a34a',
-  paddingHorizontal: 16,
-  paddingVertical: 10,
-  borderRadius: 12,
-},
+  addBtn: {
+    backgroundColor: "#16a34a",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 12,
+  },
   addBtnText: {
     color: "white",
     fontWeight: "600",
   },
   selectionRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 20,
     marginTop: 10,
-    justifyContent: 'space-between', // Para distribuir bien el Mood y el botón
-},
-pickerContainer: {
+    justifyContent: "space-between", // Para distribuir bien el Mood y el botón
+  },
+  pickerContainer: {
     // Esto simula una caja de formulario para el Picker
     flex: 1, // Ocupa el espacio disponible
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 12, // Bordes redondeados
     marginRight: 15,
-    overflow: 'hidden', // Importante para el Picker en iOS
-},
+    overflow: "hidden", // Importante para el Picker en iOS
+  },
 
-selectionBar: {
-    backgroundColor: '#EBF4FF', // Fondo azul muy claro
+  selectionBar: {
+    backgroundColor: "#EBF4FF", // Fondo azul muy claro
     padding: 12,
     borderRadius: 12,
     marginBottom: 15, // Espacio antes de la fila del Picker
     borderWidth: 1,
-    borderColor: '#3B82F6', // Borde azul claro
-},
-selectionText: {
+    borderColor: "#3B82F6", // Borde azul claro
+  },
+  selectionText: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#1D4ED8', // Texto azul oscuro
-},
+    fontWeight: "600",
+    color: "#1D4ED8", // Texto azul oscuro
+  },
 });
-
 
 export default SongForm;

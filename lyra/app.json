@@ -16,7 +16,10 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.aniger31.lyra",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
       }
     },
     "android": {
@@ -24,6 +27,7 @@
         "foregroundImage": "./assets/splash-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "usesCleartextTraffic": true,
       "edgeToEdgeEnabled": true,
       "package": "com.aniger31.lyra"
     },
@@ -34,6 +38,7 @@
       "eas": {
         "projectId": "dc00c94f-205d-4fbc-b5ab-bdff4db0a103"
       }
-    }
+    },
+    "plugins": ["expo-audio"]
   }
 }
