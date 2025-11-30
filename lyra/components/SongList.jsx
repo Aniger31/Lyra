@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
         flex:1,
     },
     listContent:{
-        paddingBottom:20, //Espacio al final de la lista
+        paddingVertical:10,
+        paddingBottom:40, //Espacio al final de la lista
     },
  emptyContainer: {
   padding: 40,

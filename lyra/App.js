@@ -43,6 +43,26 @@ function App() {
     return song.mood === activeFilter;
   });
 
+  //Calcular el mood mas dominante
+  const getDominantMood = () => {
+    if (songs.length === 0) return null;
+
+    const moodCounts = songs.reduce((acc, song) => {
+      acc[song.mood] = (acc[song.mood] || 0) + 1;
+      return acc;
+    } ,{});
+    let dominantMood = null;
+    let maxCount = 0;
+    for(const mood in moodCounts){
+      if(moodCounts[mood] > maxCount){
+        maxCount = moodCounts[mood];
+        dominantMood = mood;
+      }
+    }
+    return dominantMood;
+  };
+  const dominantMood = getDominantMood();
+
   if(!isLoaded){
     return (
       <View style={styles.loadingContainer}>
@@ -59,6 +79,12 @@ function App() {
       <View style={styles.header}>
         <Text style={styles.title}>Lyra</Text>
       </View>
+      {dominantMood && (
+        <View style = {styles.dominantMoodContainer}>
+            <Text style = {styles.dominantMoodText}> Tu Mood Dominante es: </Text>
+            <Text style = {styles.dominantMoodName}>{dominantMood}</Text>
+        </View>
+      )}
 
       <SongForm onAddSong={addSong} allSongs={songs} />
       {/* Barra de filtros */ }
@@ -103,7 +129,32 @@ safeArea: {
   flex: 1,
   backgroundColor:'#fafafa',
 },
+dominantMoodContainer:{
+  padding: 15,
+  marginHorizontal:15,
+  marginTop:10,
+  borderRadius:12,
+  backgroundColor:'#fff',
+  borderLeftWidth:5,
+  borderLeftColor:'#4F46E5',
+  flexDirection:'row',
+  alignItems:'center',
+  justifyContent:'space-between',
+  shadowColor:'#000',
+  shadowOpacity:0.05,
+  shadowRadius:3,
+  elevation:1,
+},
 
+dominantMoodText:{
+  fontSize:14,
+  color:'#6B7280',
+},
+dominantMoodName:{
+  fontSize:18,
+  fontWeight:'bold',
+  color:'#4F46E5',
+},
 });
 
 export default App;
