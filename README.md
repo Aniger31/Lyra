@@ -68,6 +68,9 @@ Sigue estos pasos para clonar el repositorio y ejecutar la aplicación en tu ent
     npm install
     # o si usas yarn:
     # yarn install
+    expo install expo-av
+    expo install @react-native-async-storage/async-storage
+
     ```
 
 3.  **Configuración de Red (Crítica para iOS/Android):**
@@ -93,7 +96,7 @@ Sigue estos pasos para clonar el repositorio y ejecutar la aplicación en tu ent
 4.  **Iniciar la aplicación:**
 
     ```bash
-    npx expo start
+    npm start
     ```
 
     Escanea el código QR con la aplicación Expo Go en tu dispositivo móvil o abre la aplicación en un simulador.
@@ -128,4 +131,5 @@ La aplicación sigue una estructura clara con énfasis en la separación de comp
 ## 🧑‍💻 Autor
 
   * **Regina Hernández Rodríguez (Aniger31)**
+  * Proyecto personal — React Native + Expo
 
