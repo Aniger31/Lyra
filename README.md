@@ -20,7 +20,7 @@ Está diseñada como una experiencia intuitiva y estética: una mezcla entre exp
       * Carátulas (artwork),
       * Metadatos,
       * **Previews de audio** (fragmentos de 30s).
-  * 🎧 **Reproducción de Audio Nativa**: Escucha un fragmento de cada canción usando el *hook* `useAudioPlayer` de `expo-audio`.
+  * 🎧 **Reproducción de audio nativa**: escucha un fragmento de cada canción usando `expo-av`
 
 Lyra es ideal para explorar cómo suenan tus emociones a través de una interfaz simple, clara y personal.
 
@@ -34,7 +34,7 @@ El proyecto está construido usando el ecosistema de **React Native** con **Expo
 | :--- | :--- | :--- |
 | **Framework Base** | **React Native** | Desarrollo móvil multiplataforma. |
 | **Entorno** | **Expo** (CLI) | Facilitar el desarrollo, *build* y testeo. |
-| **Manejo de Audio** | `expo-audio` | Reproducción de los fragmentos de audio de forma moderna y optimizada. |
+| **Manejo de Audio** | `expo-av` | Reproducción de los fragmentos de audio de forma moderna y optimizada. |
 | **Almacenamiento Local** | `@react-native-async-storage/async-storage` | Persistencia de la librería de canciones y *moods*. |
 | **Íconos** | `react-native-vector-icons/Feather` | Íconos de *Play, Pause* y *Trash*. |
 | **Filtros UI** | `@react-native-picker/picker` | Componente para selección de *moods* en el formulario. |
