@@ -13,17 +13,27 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aniger31.lyra",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/splash-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.aniger31.lyra"
     },
     "web": {
       "favicon": "./assets/splash-icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "dc00c94f-205d-4fbc-b5ab-bdff4db0a103"
+      }
     }
   }
 }
