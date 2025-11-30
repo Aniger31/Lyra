@@ -58,8 +58,8 @@ Sigue estos pasos para clonar el repositorio y ejecutar la aplicación en tu ent
 1.  **Clonar el repositorio:**
 
     ```bash
-    git clone [TU_URL_DEL_REPOSITORIO]
-    cd lyra-mood-mixer
+    git clone https://github.com/Aniger31/Lyra.git
+    cd lyra
     ```
 
 2.  **Instalar dependencias:**
